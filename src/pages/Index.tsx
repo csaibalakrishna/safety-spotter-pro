@@ -1,10 +1,7 @@
 import Header from "@/components/Header";
-import HazardReportForm from "@/components/HazardReportForm";
-import HeatmapSection from "@/components/HeatmapSection";
-import ReportedThreats from "@/components/ReportedThreats";
-import SocialFeed from "@/components/SocialFeed";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Users, TrendingUp, MapPin } from "lucide-react";
+import { ArrowRight, Shield, Users, TrendingUp, MapPin, Eye, AlertTriangle } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-ocean.jpg";
 
 const Index = () => {
@@ -29,12 +26,16 @@ const Index = () => {
               enabling rapid response and proactive disaster management through real-time data and AI analytics.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-white px-8">
-                Report Emergency <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-ocean-blue px-8">
-                View Dashboard
-              </Button>
+              <Link to="/report">
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white px-8">
+                  Report Emergency <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/threats">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-ocean-blue px-8">
+                  View Dashboard
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -69,7 +70,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Main Dashboard Sections */}
+      {/* Platform Features */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -81,26 +82,62 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Report Hazard Form */}
-            <div id="report">
-              <HazardReportForm />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Report Hazard */}
+            <Link to="/report" className="group">
+              <div className="p-6 bg-card border border-border rounded-lg hover:shadow-lg transition-all duration-300 group-hover:border-accent">
+                <div className="bg-accent/10 p-3 rounded-lg w-fit mb-4 group-hover:bg-accent/20 transition-colors">
+                  <AlertTriangle className="h-8 w-8 text-accent" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">Report a Threat</h3>
+                <p className="text-muted-foreground mb-4">
+                  Submit detailed reports of ocean hazards with location, description, and images for immediate response.
+                </p>
+                <ArrowRight className="h-5 w-5 text-accent group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
 
-            {/* Heatmap Section */}
-            <div id="heatmap">
-              <HeatmapSection />
-            </div>
+            {/* Heatmap */}
+            <Link to="/heatmap" className="group">
+              <div className="p-6 bg-card border border-border rounded-lg hover:shadow-lg transition-all duration-300 group-hover:border-warning">
+                <div className="bg-warning/10 p-3 rounded-lg w-fit mb-4 group-hover:bg-warning/20 transition-colors">
+                  <TrendingUp className="h-8 w-8 text-warning" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-warning transition-colors">Heatmap Analysis</h3>
+                <p className="text-muted-foreground mb-4">
+                  Visualize hazard hotspots and risk zones with real-time data aggregation and AI-powered insights.
+                </p>
+                <ArrowRight className="h-5 w-5 text-warning group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
 
-            {/* Reported Threats */}
-            <div id="threats">
-              <ReportedThreats />
-            </div>
+            {/* Active Threats */}
+            <Link to="/threats" className="group">
+              <div className="p-6 bg-card border border-border rounded-lg hover:shadow-lg transition-all duration-300 group-hover:border-hazard-red">
+                <div className="bg-hazard-red/10 p-3 rounded-lg w-fit mb-4 group-hover:bg-hazard-red/20 transition-colors">
+                  <Eye className="h-8 w-8 text-hazard-red" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-hazard-red transition-colors">Active Threats</h3>
+                <p className="text-muted-foreground mb-4">
+                  Monitor all reported threats in real-time with status tracking, severity levels, and verification updates.
+                </p>
+                <ArrowRight className="h-5 w-5 text-hazard-red group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
 
             {/* Social Feed */}
-            <div id="feed">
-              <SocialFeed />
-            </div>
+            <Link to="/social-feed" className="group">
+              <div className="p-6 bg-card border border-border rounded-lg hover:shadow-lg transition-all duration-300 group-hover:border-ocean-blue">
+                <div className="bg-ocean-blue/10 p-3 rounded-lg w-fit mb-4 group-hover:bg-ocean-blue/20 transition-colors">
+                  <Users className="h-8 w-8 text-ocean-blue" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-ocean-blue transition-colors">Social Analytics</h3>
+                <p className="text-muted-foreground mb-4">
+                  AI-powered analysis of social media posts to detect hazard mentions and track public sentiment.
+                </p>
+                <ArrowRight className="h-5 w-5 text-ocean-blue group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -124,10 +161,10 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-3">Quick Links</h4>
               <ul className="space-y-2 text-sm opacity-90">
-                <li><a href="#report" className="hover:text-accent">Report Hazard</a></li>
-                <li><a href="#heatmap" className="hover:text-accent">View Heatmap</a></li>
-                <li><a href="#threats" className="hover:text-accent">Active Threats</a></li>
-                <li><a href="#feed" className="hover:text-accent">Social Feed</a></li>
+                <li><Link to="/report" className="hover:text-accent">Report Hazard</Link></li>
+                <li><Link to="/heatmap" className="hover:text-accent">View Heatmap</Link></li>
+                <li><Link to="/threats" className="hover:text-accent">Active Threats</Link></li>
+                <li><Link to="/social-feed" className="hover:text-accent">Social Feed</Link></li>
               </ul>
             </div>
             <div>
